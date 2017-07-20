@@ -4,7 +4,7 @@
   "description": "Refer to the tutorial on [how to deploy](http://serverless-stack.com/chapters/deploy-the-apis.html) this.",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "./node_modules/.bin/serverless deploy"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,12 @@
     "url": "https://github.com/AnomalyInnovations/serverless-stack-demo-api/issues"
   },
   "homepage": "https://github.com/AnomalyInnovations/serverless-stack-demo-api#readme",
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "uuid": "^3.0.1"
+  },
   "devDependencies": {
+    "aws-api-gateway-cli-test": "^1.1.0",
     "aws-sdk": "^2.39.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -29,9 +34,5 @@
     "serverless-webpack": "^2.0.0",
     "webpack": "^3.0.0",
     "webpack-node-externals": "^1.6.0"
-  },
-  "dependencies": {
-    "babel-runtime": "^6.23.0",
-    "uuid": "^3.0.1"
   }
 }
