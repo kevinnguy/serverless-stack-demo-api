@@ -1,7 +1,7 @@
 import * as dynamoDbLib from './libs/dynamodb-lib';
-import { success, failure } from './libs/response-lib';
+import { response } from './libs/response-lib';
 
-export async function main(event, context, callback) {
+export const main = async (event, context, callback) => {
   const params = {
     TableName: 'notes',
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -16,14 +16,11 @@ export async function main(event, context, callback) {
   try {
     const result = await dynamoDbLib.call('get', params);
     if (result.Item) {
-      // Return the retrieved item
-      callback(null, success(result.Item));
+      callback(null, response(200, result.Item));
+    } else {
+      callback(null, response(500, { error: { message: 'Item not found.' }}));
     }
-    else {
-      callback(null, failure({status: false, error: 'Item not found.'}));
-    }
-  }
-  catch(e) {
-    callback(null, failure({status: false}));
+  } catch(e) {
+    callback(null, response(e.statusCode, { error: e }));
   }
 };
